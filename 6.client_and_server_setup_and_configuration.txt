@@ -1,0 +1,13 @@
+Cient:-
+- Set up client similar to slave.
+- Upload the dataset which is to be processed in the client using SFTP.
+- Use the below command to put the dataset in hdfs.
+	"hadoop fs -put filename.extension / "
+
+Server :-
+- Create a Server similar to master.
+- Give different ip.
+- Use the following code to install apache server
+	" yum install httpd "
+- To start Server " systemctl start httpd"
+- To check status " systemctl status httpd". {active means it is running.}

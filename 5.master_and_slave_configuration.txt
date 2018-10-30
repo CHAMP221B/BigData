@@ -1,0 +1,37 @@
+cd /etc/hadoop/
+{core-site.xml, hdfs-site.xml: we use this file for now}
+
+{IN MASTER ONLY}
+mkdir /master 								store metadata of master.
+vi hdfs-site.xml
+{start hdfs-site.xml}
+<configuration>
+	<property>
+		<name>dfs.name.dir</name>
+		<value>/master</value>
+	</property>
+</configuration>
+{end hdfs-site.xml}
+
+{IN SLAVES ONLY}
+mkdir /slave 								store metadata of slave
+vi hdfs-site.xml
+{start hdfs-site.xml}
+<configuration>
+	<property>
+		<name>dfs.name.dir</name>
+		<value>/slave</value>
+	</property>
+</configuration>
+{end hdfs-site.xml}
+
+{in all}
+vi core-site.xml
+{start file}
+<configuration>
+	<property>
+		<name>fs.default.name</name>
+		<value>hdfs://masterip:9001</value>
+	</property>
+</configuration>
+{endfile}

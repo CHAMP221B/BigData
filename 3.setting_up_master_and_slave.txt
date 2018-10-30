@@ -1,0 +1,23 @@
+
+Setting up Master:-
+- getenforce										checks whether antivirus is on or off.
+- setenforce 0										disables antivirus
+- iptables -F										disables firewall
+To make above changes permanent write them in /root/.bashrc 
+- ifconfig											to know the network configuration or IP.
+- vi /etc/sysconfig/network-scripts/ifcfg-enp0s3		
+In the above file write the below commands to make the ip address of the system static.
+BOOTPROTO=static
+IPADDR=(set ip)
+NETMASK=255.255.255.0
+GATEWAY=(to see gateway type "route -n" in shell and write here)(gateway is the network to which your pc is connected)
+DNS1=8.8.8.8
+ONBOOT=yes
+(save the file using esc -> :wq -> enter)
+- systemctl restart network
+now ping google by writing "ping goo.gl" in shell
+if you get response then your system is working.
+
+
+Setting up Slave:-
+Do the same process for slave as for master but give a different ip to every slave.

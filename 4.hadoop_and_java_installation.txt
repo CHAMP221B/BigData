@@ -1,0 +1,28 @@
+
+{open mobaxterm and add new sessions and add ssh master and slave}
+then on localhost:
+
+hostnamectl  set-hostname master{changes name}
+exec bash{runs script} 
+
+{click on multi  execution to run at all parellel}
+vi /etc/hosts {give ip and names that was set before and save and exit}
+example 192.168.43.161 master
+		192.168.43.162 slave0
+
+{click session and add SFTP and add master and slaves}
+{add file: jdk and hadoop 1.2.1}
+
+{click on multi execution}
+{INSTALL JAVA}
+rpm -ivh jdk-tab{installs java}
+export JAVA_HOME=/usr/java/jdk-tab{home set}
+export PATH=/usr/java/jdk-tab/bin/:$PATH
+{put below codes bashrc}
+- JAVA_HOME=/usr/java/jdk-tab
+- PATH=/usr/java/jdk-tab/bin/:$PATH
+
+java -version{ check java is installed and version}
+
+HADOOP INSTALL:-
+rpm -ivh hadoop-{tab} --force {install hadoop forcefully because hadoop changes the file system}

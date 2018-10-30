@@ -1,0 +1,6 @@
+cgi-bin and html in hadoop:-
+
+Integration of Map-reduce task with web UI.:-
+- We use html for designing the frontend of web UI and these files are saved in "/var/www/html".
+- and for backend we use python and python files are stored in "/var/www/cgi-bin".
+

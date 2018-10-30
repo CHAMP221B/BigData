@@ -1,0 +1,41 @@
+Map-Reduce:-
+
+Tasktracker:- 
+- vi /etc/hadoop/core-site.xml
+- put the address of hdfs in above file.
+- vi /etc/hadoop/mapred-site.xml
+write the below lines in this file
+<configuration>
+<property>
+<name>mapred.job.tracker</name>
+<value>jobtracker_IP:9002</value>
+</property>
+</configuration>
+
+- Do everything same as we did in slave.{hdfs-site.xml, core-site.xml etc.}
+
+Jobtracker:-
+- Do same thing in jobtracker as we did in Tasktrackers.
+- To see all the active trackers 
+	"hadoop job -list-active-trackers "
+- UI port: 50030 (jobtracker_IP:50030)
+
+
+Client:- 
+
+do below things in client
+- vi /etc/hadoop/mapred-site.xml
+write the below lines in this file
+<configuration>
+<property>
+<name>mapred.job.tracker</name>
+<value>jobtracker_IP:9002</value>
+</property>
+</configuration>
+
+- There is an already made program for word count 
+	"hadoop jar /usr/share/hadoop/hadoop-examples 1.2.1.jar wordcount /filename.txt /ouput"
+- To see the wordcount in output file.
+	"hadoop fs -cat /output/part-r-00000"
+
+Now write map reduce code according to your needs.

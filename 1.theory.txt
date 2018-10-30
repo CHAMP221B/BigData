@@ -1,0 +1,61 @@
+What is Big Data?
+- Big data is a term used to refer to the study and applications of data sets that are so big and complex that traditional data processing application software are inadequate to deal with them.
+- Data that is unstructured or time sensitive or simply very large can't be processed by relational database engines. This type of data requires a different processing approach called big data which uses massive parallelism on readily available hardware.
+
+Hadoop:- 
+- The apache hadoop software library is a framework that allows for the distributed processing of large datasets across clusters of computers using simple programming models.
+- It is designed to scale up from single servers to thousands of machines, each offering local computations and storage.
+- The library itself is designed to detect and handle failures at the application layer.
+
+Hadoop Architechture:-
+- Hadoop follows a master-slave architechture for the transformation and analysis of large datasets using hadoop Map-Reduce paradigm.
+- The three important hadoop components that play a vital role in hadoop architechture are - 
+	i) HDFS (Hadoop Distributed File System) 
+	ii) Map-Reduce 
+	iii) YARN (Yet Another Resource Navigator - available from hadoop 2)
+
+Master Node (Namenode):-
+- Used for data storage in HDFS.
+- It is a GUI (Graphical User Interface) and stores all the information about Datanodes.
+
+Slave Node (Datanode) :-
+- These are the machines in hadoop clusters which store data and perform complex computations.
+- Every Slave has a Tasktracker Deamon and datanodes that synchronizes the processes with Jobtracker and Namenode.
+- It is used as CLI (Command Line Interface).
+- Data sent from client is stored in datanodes in the form of blocks.
+- On startup every datanode connects to the namenode and perform handshake to verify namespace and ID.
+- Datanodes send heartbeat signals to the namenode every three seconds to confirm that datanode is operating and block replicas are available.
+- Data sent from client is randomly stored in datanodes with the default replication factor 3. (replication factor can be changed).
+- Default Block size is 64 MB but it can be extended upto 256 MB.
+
+Client:-
+- Client is also used as a CLI. 
+- It is no more than a slave but any slave that sends data to hdfs is client.
+
+Jobtracker:-
+- Jobtracker keeps track of all the datanodes and tasktrackers(further explained in Map-Reduce Section given below).
+- From Hadoop 2, to reduce the load on Jobtracker YARN was introduced to control the datanodes.
+
+Tasktracker:-
+-Tasktracker perform map and reduce functions.
+
+Role of HDFS in Hadoop architechture:-
+- A file on hdfs is split into multiple blocks and each is replicated within hadoop cluster.
+- HDFS stores the replications data on machines referred to as datanode while file system metadata is stored in machines known as namenode.
+- The namenode and datanode communicate with each other using TCP(Transmission Control Protocol).
+
+Map-Reduce :-
+- It provides a parallel processing model and associated implementation were released to process huge amounts of data.
+- With Map-Reduce the queries are split and distributed and processed across parallel nodes. (Map Step)
+- The results of map step are then gathered and then delivered. (Reduce step)
+- Map functions transform the data into key-value pairs and then the keys are stored where a reduce function is applied to merge the values based on the keys into a single output.
+
+Map-Reduce Executions:-
+- The execution of Map-Reduce begins when the client submits the job configuration to the Jobtracker that specifies the map and reduce function along with the location for input and output data.
+- On receiving the job configuration the Jobtracker identifies the number of splits based on the input path and select tasktrackers based on their network vicinity to the data sources.
+- The processing of map phase begins where the tasktracker extracts the input data from the splits.
+- Map function is invoked for each record passed by the input format which produces key-value pair in the memory buffer.
+- The memory buffer is then sorted to different reducer nodes by invoking the combined or reduced functions.
+- On completion of the map task tasktracker notifies Jobtracker
+- When all tasktrackers are done mapping, the jobtracker notifies the selected tasktrackers to begin the reduce phase.
+- Reduce function is then invoked which collects the aggregated values into output files.
